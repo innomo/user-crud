@@ -26,8 +26,8 @@ public class UserController {
         return  userService.addUser(user);
     }
 
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id){
+    @GetMapping("user/{id}")
+    public User getUserById(@PathVariable Long id){
         return userService.getUserById(id);
     }
 
@@ -36,7 +36,7 @@ public class UserController {
         return userService.updateUser(user,id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public  void deleteuser(@PathVariable Long id){
         userService.deleteUser(id);
     }
