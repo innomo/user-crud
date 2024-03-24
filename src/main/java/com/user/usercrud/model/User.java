@@ -18,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
-    private String lastname;
+    private String lastName;
     @NaturalId(mutable=true)
     private String email;
     private String department;

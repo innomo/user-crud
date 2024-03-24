@@ -6,6 +6,8 @@ import com.user.usercrud.model.User;
 import com.user.usercrud.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -32,15 +34,15 @@ public class UserService implements com.user.usercrud.service.IUserService {
     }
 
     @Override
-    public User updateUser(User user, Long userId) {
+    public User updateUser(User user,  Long Id) {
 
-        return userRepository.findById(userId).map(st ->{
-            st.setFirstName(st.getFirstName());
-            st.setLastname(st.getLastname());
-            st.setEmail(st.getEmail());
-            st.setDepartment(st.getDepartment());
+        return userRepository.findById(Id).map(st ->{
+            st.setFirstName(user.getFirstName());
+            st.setLastName(user.getLastName());
+            st.setEmail(user.getEmail());
+            st.setDepartment(user.getDepartment());
             return userRepository.save(st);
-        }).orElseThrow(()->new UserNotFoundException("Sorry User not found"));
+        }).orElseThrow(()->new UserNotFoundException("Sorry, User not found"));
     }
 
     @Override
@@ -49,10 +51,11 @@ public class UserService implements com.user.usercrud.service.IUserService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        if(!userRepository.existsById(userId)){
+    public void deleteUser(Long Id) {
+        if(!userRepository.existsById(Id)){
             throw new UserNotFoundException("Sorry, User not found exception");
         }
+        userRepository.deleteById(Id);
         System.out.println("User deleted");
     }
 }

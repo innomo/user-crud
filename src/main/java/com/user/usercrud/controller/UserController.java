@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:5173/")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/users")
@@ -17,7 +18,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers(){
-        return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -26,18 +27,18 @@ public class UserController {
         return  userService.addUser(user);
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id){
         return userService.getUserById(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@RequestBody User user, @PathVariable Long id){
         return userService.updateUser(user,id);
     }
 
-    @DeleteMapping("delete/{id}")
-    public  void deleteuser(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public  void deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
     }
 }
